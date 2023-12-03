@@ -51,19 +51,15 @@ function Home() {
 
 
   const handleUpdateUser = () => {
-    // Fetch the user by ID and show the update form
-    // handleFetchUserById(userId);
     setUpdateFormVisible(true);
   };
 
   const handleUpdate = (updatedUser) => {
-    // Dispatch the update action and close the form
     dispatch(updateUser(updatedUser));
     setUpdateFormVisible(false);
   };
 
   const closeUpdateForm = () => {
-    // Close the update form
     setUpdateFormVisible(false);
   };
 
@@ -103,7 +99,6 @@ function Home() {
   return (
     <>
       {isCreateUserFormVisible && <CreateUserForm closeForm={closeForm} onClose={toggleCreateUserForm} />}
-      {/* Conditionally render the selected team members */}
       {showselectedTeamMembers && (
         <SelectedTeamMembers
           closeShowSelectedTeamMembers={closeShowSelectedTeamMembers}
@@ -122,7 +117,6 @@ function Home() {
 
       {!isCreateUserFormVisible && !isUpdateFormVisible && !showselectedTeamMembers && (
         <div className="container mx-auto bg-gray-100">
-          {/* <h1 className="text-4xl font-semibold mb-4">User List</h1> */}
 
           <Navbar
             searchQuery={searchQuery}

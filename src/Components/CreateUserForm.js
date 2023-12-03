@@ -11,8 +11,8 @@ function CreateUserForm({ closeForm }) {
     last_name: '',
     email: '',
     gender: '',
-    domain: '', // Added the domain field
-    // Add more fields as needed
+    domain: '', 
+  
   });
 
   const handleInputChange = (e) => {
@@ -28,9 +28,8 @@ function CreateUserForm({ closeForm }) {
       last_name: '',
       email: '',
       gender: '',
-      domain: '', // Reset domain field
+      domain: '', 
     });
-    // Close the form after submission
     closeForm(false);
   };
 
@@ -114,7 +113,6 @@ function CreateUserForm({ closeForm }) {
             <option value="Business Development">Business Development</option>
             <option value="IT">IT</option>
             <option value="UI Designing">UI Designing</option>
-            {/* Add other domain options as needed */}
           </select>
         </div>
         <div className="flex justify-end">
