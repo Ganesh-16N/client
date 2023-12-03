@@ -75,7 +75,7 @@ function Home() {
     const isUnique =
       !selectedTeamMembers.some(
         (teamMember) =>
-          teamMember.domain.toLowerCase() === user.domain.toLowerCase() &&
+          teamMember._id === user._id &&
           teamMember.available === user.available
       );
 
@@ -171,14 +171,14 @@ function Home() {
                     Delete
                   </button>
                   <button
-                    className={`bg-${selectedTeamMembers.some((member) => member._id === user._id) ? 'yellow' : 'blue'}-500 text-white px-2 py-1 rounded mt-2 hover:bg-${selectedTeamMembers.some((member) => member._id === user._id) ? 'yellow' : 'blue'}-600`}
+                    className={`bg-${selectedTeamMembers.some((member) => member._id === user._id) ? 'blue' : 'blue'}-500 text-white px-2 py-1 rounded mt-2 hover:bg-${selectedTeamMembers.some((member) => member._id === user._id) ? 'yellow' : 'blue'}-600`}
                     onClick={() => {
                       selectedTeamMembers.some((member) => member._id === user._id)
                         ? handleRemoveFromTeam(user._id)
                         : handleAddToTeam(user);
                     }}
                   >
-                    {selectedTeamMembers.some((member) => member._id === user._id) ? 'Remove from Team' : 'Add to Team'}
+                    {selectedTeamMembers.some((member) => member._id === user._id) ? 'Remove' : 'Add to Team'}
                   </button>
                 </div>
               </div>
