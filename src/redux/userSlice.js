@@ -11,12 +11,10 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
 
 // Async Thunk for creating a new user
 export const createUser = createAsyncThunk('users/createUser', async (user) => {
-  const response = await axios.post("https://users-node.onrender.com/api/users", user, {
-    headers: {
-      'Content-Type': 'application/json', // Set the content type to JSON
-      // Add any other headers if needed
-    },
-  });
+  console.log(JSON.stringify(user))
+  const response = await axios.post("https://users-node.onrender.com/api/users", {
+    "id":1001,"first_name":`${user.first_name}`,"last_name":`${user.last_name}`,"email":`${user.email}`,"gender":`${user.gender}`,"avatar":"https://robohash.org/sintessequaerat.png?size=50x50&set=set1","domain":`${user.domain}`,"available":false
+  })
   return response.data;
 });
 

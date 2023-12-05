@@ -7,12 +7,14 @@ function CreateUserForm({ closeForm }) {
   const dispatch = useDispatch();
 
   const [newUser, setNewUser] = useState({
+    id: 1,
     first_name: '',
     last_name: '',
     email: '',
     gender: '',
     domain: '', 
-  
+    avatar : "https://robohash.org/sintessequaerat.png?size=50x50&set=set1",
+    available : false
   });
 
   const handleInputChange = (e) => {
@@ -24,11 +26,14 @@ function CreateUserForm({ closeForm }) {
     e.preventDefault();
     dispatch(createUser(newUser));
     setNewUser({
+      id: 1,
       first_name: '',
       last_name: '',
       email: '',
       gender: '',
       domain: '', 
+      avatar : "https://robohash.org/sintessequaerat.png?size=50x50&set=set1",
+      available : false
     });
     closeForm(false);
   };
