@@ -20,11 +20,11 @@ function UpdateUserForm({ user, onUpdate, onClose }) {
   };
 
   return (
-    <div className="bg-white p-8 rounded-md shadow-md max-w-md mx-auto mt-8">
+    <div className="bg-gray-900 text-white p-8 rounded-md shadow-md max-w-md mx-auto mt-8">
       <h2 className="text-2xl font-semibold mb-4 text-center">Update User</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="first_name" className="block text-sm font-medium text-gray-300">
             First Name
           </label>
           <input
@@ -33,12 +33,12 @@ function UpdateUserForm({ user, onUpdate, onClose }) {
             name="first_name"
             value={updatedUser.first_name}
             onChange={handleChange}
-            className="form-input mt-1 block w-full rounded-md border-gray-300 bg-gray-100"
+            className="form-input mt-1 p-2 pl-4 block w-full rounded-md border-gray-600 bg-gray-800 text-white"
             required
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="last_name" className="block text-sm font-medium text-gray-300">
             Last Name
           </label>
           <input
@@ -47,12 +47,12 @@ function UpdateUserForm({ user, onUpdate, onClose }) {
             name="last_name"
             value={updatedUser.last_name}
             onChange={handleChange}
-            className="form-input mt-1 block w-full rounded-md border-gray-300 bg-gray-100"
+            className="form-input mt-1 p-2 pl-4 block w-full rounded-md border-gray-600 bg-gray-800 text-white"
             required
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-300">
             Email
           </label>
           <input
@@ -61,26 +61,31 @@ function UpdateUserForm({ user, onUpdate, onClose }) {
             name="email"
             value={updatedUser.email}
             onChange={handleChange}
-            className="form-input mt-1 block w-full rounded-md border-gray-300 bg-gray-100"
+            className="form-input mt-1 p-2 pl-4 block w-full rounded-md border-gray-600 bg-gray-800 text-white"
             required
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="gender" className="block text-sm font-medium text-gray-300">
             Gender
           </label>
-          <input
-            type="text"
+          <select
             id="gender"
             name="gender"
             value={updatedUser.gender}
             onChange={handleChange}
-            className="form-input mt-1 block w-full rounded-md border-gray-300 bg-gray-100"
+            className="form-select mt-1 p-2 pl-4 block w-full rounded-md border-gray-600 bg-gray-800 text-white"
             required
-          />
+          >
+            <option value="">Select a gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Polygender">Polygender</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
         <div className="mb-4">
-          <label htmlFor="domain" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="domain" className="block text-sm font-medium text-gray-300">
             Domain
           </label>
           <select
@@ -88,7 +93,7 @@ function UpdateUserForm({ user, onUpdate, onClose }) {
             name="domain"
             value={updatedUser.domain}
             onChange={handleChange}
-            className="form-select mt-1 block w-full rounded-md border-gray-300 bg-gray-100"
+            className="form-select mt-1 p-2 pl-4 block w-full rounded-md border-gray-600 bg-gray-800 text-white"
             required
           >
             <option value="">Select a domain</option>
@@ -109,7 +114,7 @@ function UpdateUserForm({ user, onUpdate, onClose }) {
           <button
             type="button"
             onClick={() => onClose(false)}
-            className="ml-2 text-gray-700 hover:text-gray-800"
+            className="ml-2 text-gray-300 hover:text-gray-400"
           >
             Cancel
           </button>

@@ -4,7 +4,7 @@ import Home from './Screens/Home'
 
 const App = () => {
   return (
-    <div>
+    <div >
       <Home></Home> 
     </div>
   )

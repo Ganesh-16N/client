@@ -2,14 +2,26 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+const URL = "https://users-node.onrender.com/api/users"
+export const fetchUsers = createAsyncThunk('users/fetchUsers', async ({ page, searchTerm, gender, domain, available}) => {
+  try {
+    const response = await axios.get(`https://users-node.onrender.com/api/users`, {
+      params: {
+        page,
+        searchTerm,
+        gender,
+        domain,
+        available
+      },
+    });
 
-// Async Thunk for fetching users
-export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-  const response = await axios.get("https://users-node.onrender.com/api/users");
-  return response.data;
+    return response.data.data;
+  } catch (error) {
+    alert('Error fetching users:', error.message);
+    throw error; 
+  }
 });
 
-// Async Thunk for creating a new user
 export const createUser = createAsyncThunk('users/createUser', async (user) => {
   console.log(JSON.stringify(user))
   const response = await axios.post("https://users-node.onrender.com/api/users", {
@@ -18,13 +30,7 @@ export const createUser = createAsyncThunk('users/createUser', async (user) => {
   return response.data;
 });
 
-// Async Thunk for updating a user
-// export const addToTeam = createAsyncThunk('users/updateUser', async (user) => {
-//   const response = await axios.put(`${"https://users-node.onrender.com/api/users"}/${user._id}`, {
-//     "id":`${user.id}`,"first_name":`${user.first_name}`,"last_name":`${user.last_name}`,"email":`${user.email}`,"gender":`${user.gender}`,"avatar":`${user.avatar}`,"domain":`${user.domain}`,"available":false,"is_team_member":true
-//   });
-//   return response.data;
-// });
+
 export const updateUser = createAsyncThunk('users/updateUser', async (user, bool) => {
   const response = await axios.put(`${"https://users-node.onrender.com/api/users"}/${user._id}`, {
     "id":`${user.id}`,"first_name":`${user.first_name}`,"last_name":`${user.last_name}`,"email":`${user.email}`,"gender":`${user.gender}`,"avatar":`${user.avatar}`,"domain":`${user.domain}`,"available":false,"is_team_member":`${bool}`
@@ -32,18 +38,12 @@ export const updateUser = createAsyncThunk('users/updateUser', async (user, bool
   return response.data;
 });
 
-// export const updateUser  = createAsyncThunk('users/updateUser', async (user) => {
-//   const response = await axios.put(`${"https://users-node.onrender.com/api/users"}/${user._id}`, user);
-//   return response.data;
-// });
 
-// Async Thunk for deleting a user
 export const deleteUser = createAsyncThunk('users/deleteUser', async (userId) => {
   await axios.delete(`${"https://users-node.onrender.com/api/users"}/${userId}`);
   return userId;
 });
 
-// Async Thunk for fetching a single user by ID
 export const fetchUserById = createAsyncThunk('users/fetchUserById', async (userId) => {
   const response = await axios.get(`${"https://users-node.onrender.com/api/users"}/${userId}`);
   return response.data;
@@ -96,38 +96,6 @@ const userSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
-      // .addCase(addToTeam.pending, (state) => {
-      //   state.status = 'loading';
-      // })
-      // .addCase(addToTeam.fulfilled, (state, action) => {
-      //   state.status = 'succeeded';
-      //   const updatedUser = action.payload;
-      //   const index = state.list.findIndex((user) => user.id === updatedUser.id);
-      //   if (index !== -1) {
-      //     state.list[index] = updatedUser;
-      //   }
-      // })
-      // .addCase(addToTeam.rejected, (state, action) => {
-      //   state.status = 'failed';
-      //   state.error = action.error.message;
-      // })
-    
-      // // Update extraReducers for deleteFromTeam
-      // .addCase(deleteFromTeam.pending, (state) => {
-      //   state.status = 'loading';
-      // })
-      // .addCase(deleteFromTeam.fulfilled, (state, action) => {
-      //   state.status = 'succeeded';
-      //   const updatedUser = action.payload;
-      //   const index = state.list.findIndex((user) => user.id === updatedUser.id);
-      //   if (index !== -1) {
-      //     state.list[index] = updatedUser;
-      //   }
-      // })
-      // .addCase(deleteFromTeam.rejected, (state, action) => {
-      //   state.status = 'failed';
-      //   state.error = action.error.message;
-      // });
   },
 });
 

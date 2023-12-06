@@ -2,30 +2,27 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-let URL = "localhost:3000/members"
-// Async Thunk for adding a user to the team
+let URL = "https://users-node.onrender.com/members"
+
 export const addToTeam = createAsyncThunk('team/addToTeam', async (user) => {
-  const response = await axios.put(URL,  {
-    "_id":`${user._id}`,"first_name":`${user.first_name}`,"last_name":`${user.last_name}`,"email":`${user.email}`,"gender":`${user.gender}`,"avatar":"https://robohash.org/sintessequaerat.png?size=50x50&set=set1","domain":`${user.domain}`,"available":false
+  const response = await axios.post(URL,  {
+    "_id":`${user._id}`,"first_name":`${user.first_name}`,"last_name":`${user.last_name}`,"email":`${user.email}`,"gender":`${user.gender}`,"avatar":`${user.avatar}`,"domain":`${user.domain}`,"available":false
   });
+
+  // due to some issue the user directly giving some error so did this way
   return response.data;
 });
 
-// Async Thunk for deleting a user from the team
 export const deleteFromTeam = createAsyncThunk('team/deleteFromTeam', async (userId) => {
-  const response = await axios.put(`${URL}/${userId}`, {
-    is_team_member: false,
-  });
+  const response = await axios.delete(`${URL}/${userId}`);
   return response.data;
 });
 
-// Async Thunk for fetching all team members
 export const fetchTeamMembers = createAsyncThunk('team/fetchTeamMembers', async () => {
   const response = await axios.get(URL);
   return response.data;
 });
 
-// Create the slice
 const teamSlice = createSlice({
   name: 'team',
   initialState: {
@@ -42,7 +39,7 @@ const teamSlice = createSlice({
       })
       .addCase(deleteFromTeam.fulfilled, (state, action) => {
         const updatedUser = action.payload;
-        state.members = state.members.filter((user) => user.id !== updatedUser.id);
+        state.members = state.members.filter((user) => user._id !== updatedUser.userId);
       })
       .addCase(fetchTeamMembers.pending, (state) => {
         state.status = 'loading';

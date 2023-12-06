@@ -1,13 +1,9 @@
 // SelectedTeamMembers.js
 import React from 'react';
-import { useSelector } from 'react-redux';
-
 const SelectedTeamMembers = ({ teamMembers, onRemoveFromTeam, closeShowSelectedTeamMembers }) => {
 
-
-
     return (
-        <div className="container mx-auto p-8 bg-gray-100">
+        <div className="container mx-auto p-8 bg-gray-800 text-white min-h-full ">
             <div className="flex justify-between items-center">
                 <h1 className="text-4xl font-semibold mb-4">Selected Team Members</h1>
                 <button className=' text-white rounded bg-red-600 p-2' onClick={() => closeShowSelectedTeamMembers(false)}>close</button>
@@ -16,7 +12,7 @@ const SelectedTeamMembers = ({ teamMembers, onRemoveFromTeam, closeShowSelectedT
                 {teamMembers.map((member) => (
                     <div
                         key={member._id}
-                        className="bg-white border border-gray-300 rounded-lg shadow-lg p-6 transition-transform hover:transform hover:scale-105 relative"
+                        className="bg-gray-900 border border-gray-300 rounded-lg shadow-lg p-6 transition-transform hover:transform hover:scale-105 relative"
                     >
 
                         <div className="text-center mb-2">
