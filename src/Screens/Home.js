@@ -6,11 +6,23 @@ import CreateUserForm from '../Components/CreateUserForm';
 import SelectedTeamMembers from '../Components/SelectedTeamMembers';
 import Navbar from '../Components/Navbar';
 import UpdateUserForm from '../Components/UpdateUserForm';
+import { fetchTeamMembers } from '../redux/teamSlice';
 
 function Home() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.list);
 
+  
+
+  
+  const users = useSelector((state) => state.users.list);
+  
+  let selectedMembers = users.filter(user=> user.available === true ) 
+  
+  const members = useSelector((state) => state);
+
+  console.log(members)
+  
+  
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 20;
   const [isCreateUserFormVisible, setCreateUserFormVisible] = useState(false);
@@ -18,17 +30,19 @@ function Home() {
   const [selectedDomain, setSelectedDomain] = useState('');
   const [selectedGender, setSelectedGender] = useState('');
   const [selectedAvailability, setSelectedAvailability] = useState(null);
-  const [selectedTeamMembers, setSelectedTeamMembers] = useState([]);
+  const [selectedTeamMembers, setSelectedTeamMembers] = useState(selectedMembers);
   const [showselectedTeamMembers, setshowSelectedTeamMembers] = useState(false);
   const [isUpdateFormVisible, setUpdateFormVisible] = useState(false);
   const [selectedUserForUpdate, setSelectedUserForUpdate] = useState(null);
-
+  
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  
   useEffect(() => {
     dispatch(fetchUsers());
+    dispatch(fetchTeamMembers())
+    
   }, [dispatch]);
 
   const filterUsers = () => {
@@ -68,16 +82,7 @@ function Home() {
   };
 
   const handleAddToTeam = (user) => {
-    const isUnique =
-      !selectedTeamMembers.some(
-        (teamMember) =>
-          teamMember._id === user._id &&
-          teamMember.available === user.available
-      );
-
-    if (isUnique) {
-      setSelectedTeamMembers((prevMembers) => [...prevMembers, user]);
-    }
+    dispatch(updateUser(user, true))
   };
 
   const handleRemoveFromTeam = (userId) => {
@@ -150,6 +155,7 @@ function Home() {
                   <p>Email: {user.email}</p>
                   <p>Gender: {user.gender}</p>
                   <p>Domain: {user.domain}</p>
+                  <p>team: {user.is_team_member ? "yes" : "n"}</p>
                 </div>
                 <div className="flex justify-between mt-2">
                   <button

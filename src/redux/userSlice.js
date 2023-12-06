@@ -13,16 +13,29 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
 export const createUser = createAsyncThunk('users/createUser', async (user) => {
   console.log(JSON.stringify(user))
   const response = await axios.post("https://users-node.onrender.com/api/users", {
-    "id":1001,"first_name":`${user.first_name}`,"last_name":`${user.last_name}`,"email":`${user.email}`,"gender":`${user.gender}`,"avatar":"https://robohash.org/sintessequaerat.png?size=50x50&set=set1","domain":`${user.domain}`,"available":false
+    "id":1001,"first_name":`${user.first_name}`,"last_name":`${user.last_name}`,"email":`${user.email}`,"gender":`${user.gender}`,"avatar":"https://robohash.org/sintessequaerat.png?size=50x50&set=set1","domain":`${user.domain}`,"available":false,"is_team_member":false
   })
   return response.data;
 });
 
 // Async Thunk for updating a user
-export const updateUser = createAsyncThunk('users/updateUser', async (user) => {
-  const response = await axios.put(`${"https://users-node.onrender.com/api/users"}/${user._id}`, user);
+// export const addToTeam = createAsyncThunk('users/updateUser', async (user) => {
+//   const response = await axios.put(`${"https://users-node.onrender.com/api/users"}/${user._id}`, {
+//     "id":`${user.id}`,"first_name":`${user.first_name}`,"last_name":`${user.last_name}`,"email":`${user.email}`,"gender":`${user.gender}`,"avatar":`${user.avatar}`,"domain":`${user.domain}`,"available":false,"is_team_member":true
+//   });
+//   return response.data;
+// });
+export const updateUser = createAsyncThunk('users/updateUser', async (user, bool) => {
+  const response = await axios.put(`${"https://users-node.onrender.com/api/users"}/${user._id}`, {
+    "id":`${user.id}`,"first_name":`${user.first_name}`,"last_name":`${user.last_name}`,"email":`${user.email}`,"gender":`${user.gender}`,"avatar":`${user.avatar}`,"domain":`${user.domain}`,"available":false,"is_team_member":`${bool}`
+  });
   return response.data;
 });
+
+// export const updateUser  = createAsyncThunk('users/updateUser', async (user) => {
+//   const response = await axios.put(`${"https://users-node.onrender.com/api/users"}/${user._id}`, user);
+//   return response.data;
+// });
 
 // Async Thunk for deleting a user
 export const deleteUser = createAsyncThunk('users/deleteUser', async (userId) => {
@@ -82,7 +95,39 @@ const userSlice = createSlice({
       .addCase(fetchUserById.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
-      });
+      })
+      // .addCase(addToTeam.pending, (state) => {
+      //   state.status = 'loading';
+      // })
+      // .addCase(addToTeam.fulfilled, (state, action) => {
+      //   state.status = 'succeeded';
+      //   const updatedUser = action.payload;
+      //   const index = state.list.findIndex((user) => user.id === updatedUser.id);
+      //   if (index !== -1) {
+      //     state.list[index] = updatedUser;
+      //   }
+      // })
+      // .addCase(addToTeam.rejected, (state, action) => {
+      //   state.status = 'failed';
+      //   state.error = action.error.message;
+      // })
+    
+      // // Update extraReducers for deleteFromTeam
+      // .addCase(deleteFromTeam.pending, (state) => {
+      //   state.status = 'loading';
+      // })
+      // .addCase(deleteFromTeam.fulfilled, (state, action) => {
+      //   state.status = 'succeeded';
+      //   const updatedUser = action.payload;
+      //   const index = state.list.findIndex((user) => user.id === updatedUser.id);
+      //   if (index !== -1) {
+      //     state.list[index] = updatedUser;
+      //   }
+      // })
+      // .addCase(deleteFromTeam.rejected, (state, action) => {
+      //   state.status = 'failed';
+      //   state.error = action.error.message;
+      // });
   },
 });
 

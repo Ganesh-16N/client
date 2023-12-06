@@ -1,7 +1,11 @@
 // SelectedTeamMembers.js
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const SelectedTeamMembers = ({ teamMembers, onRemoveFromTeam, closeShowSelectedTeamMembers }) => {
+
+
+
     return (
         <div className="container mx-auto p-8 bg-gray-100">
             <div className="flex justify-between items-center">
