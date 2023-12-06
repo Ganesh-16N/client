@@ -12,7 +12,7 @@ export const addToTeam = createAsyncThunk('team/addToTeam', async (user) => {
   // due to some issue the user directly giving some error so did this way
   return response.data;
 });
-
+ 
 export const deleteFromTeam = createAsyncThunk('team/deleteFromTeam', async (userId) => {
   const response = await axios.delete(`${URL}/${userId}`);
   return response.data;

@@ -1,10 +1,10 @@
 // Navbar.js
-import React, { useState } from 'react';
+import React from 'react';
 
 function Navbar({
   searchQuery,
   onSearchChange,
-  selectedDomain,
+  selectedDomain, 
   onDomainChange,
   selectedGender,
   onGenderChange,
@@ -75,8 +75,8 @@ function Navbar({
     </label>
   </div>
 </div>
-
-
+ 
+ 
       <div className="flex items-center space-x-4 mt-4 md:mt-0">
         <button
           className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-md hover:opacity-90 focus:outline-none"

@@ -2,7 +2,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const URL = "https://users-node.onrender.com/api/users"
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async ({ page, searchTerm, gender, domain, available}) => {
   try {
     const response = await axios.get(`https://users-node.onrender.com/api/users`, {
@@ -59,7 +58,7 @@ const userSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder
+    builder 
       .addCase(fetchUsers.pending, (state) => {
         state.status = 'loading';
       })

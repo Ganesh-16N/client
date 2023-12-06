@@ -31,7 +31,7 @@ const SelectedTeamMembers = ({ teamMembers, onRemoveFromTeam, closeShowSelectedT
                                 className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                                 onClick={() => onRemoveFromTeam(member._id)}
                             >
-                                Remove from Team
+                                 Remove from Team
                             </button>
                         </div>
                     </div>

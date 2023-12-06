@@ -9,7 +9,7 @@ const UserCard = ({ user, onUpdate, onDelete, onFetchUserById }) => (
     <div className="user-card-body">
       <h3 className="text-lg font-semibold mb-2">{user.first_name} {user.last_name}</h3>
       <p>Email: {user.email}</p>
-      <p>Gender: {user.gender}</p>
+      <p>Gender: {user.gender}</p> 
       <p>Availability: {user.available ? 'Available' : 'Not Available'}</p>
       {/* Add more user details as needed */}
     </div>

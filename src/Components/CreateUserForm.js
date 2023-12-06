@@ -103,7 +103,7 @@ function CreateUserForm({ closeForm }) {
             <option value="Female">Female</option>
             <option value="Polygender">Polygender</option>
             <option value="Other">Other</option>
-          </select>
+          </select> 
         </div>
         <div>
           <label htmlFor="domain" className="block text-sm font-medium text-gray-300">
