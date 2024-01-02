@@ -82,7 +82,7 @@ function Navbar({
           className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-md hover:opacity-90 focus:outline-none"
           onClick={onCreateUserClick}
         >
-          Create User
+          Create New
         </button>
 
         <button
